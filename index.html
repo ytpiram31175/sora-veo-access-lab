@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07130f">
+  <meta name="robots" content="index,follow">
+  <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://ytpiram31175.github.io/sora-veo-access-lab/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Sora Veo Access Lab | Free2AI</title>
+  <meta name="description" content="Access notes for GPT-5.6, Claude Opus 4.8 4.8, Gemini 3.5 3.5, DeepSeek V4 V4, Qwen3.73.7 and Grok 4.5 4.5 through lightweight AI API relay and gateway routes.">
+  <meta name="keywords" content="sora-veo-access-lab,gpt-api-gift-free,free AI relay,cheap LLM gateway,GPT-5.6,Claude Opus 4.8 4.8,Gemini 3.5 3.5,DeepSeek V4 V4,Qwen3.73.7,Grok 4.5 4.5,Llama,Mistral,OpenAI API,ChatGPT relay,Claude API,Gemini 3.5 API,AIGC,AI gateway,api proxy,ai-router,OPPO style clean UI">
+  <meta name="author" content="Free2AI">
+  <meta name="application-name" content="Free2AI">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Free2AI">
+  <meta property="og:title" content="GPT-5.6、Claude Opus 4.8 API 中转与低成本调用 | Free2AI">
+  <meta property="og:description" content="聚合 GPT-5.6 Luna、Sol、Terra、Claude Opus 4.8、Claude Opus 4.8 与 Gemini 3.5 等模型通道，为开发测试、自动化和内容工作流提供高速稳定的 AI API 入口。">
+  <meta property="og:url" content="https://ytpiram31175.github.io/sora-veo-access-lab/">
+  <meta property="og:image" content="https://free2ai.pages.dev/favicon.svg">
+  <meta property="og:image:alt" content="Free2AI AI API 中转导航">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="GPT-5.6、Claude Opus 4.8 API 中转 | Free2AI">
+  <meta name="twitter:description" content="GPT-5.6、Claude Opus 4.8、Claude Opus 4.8、Gemini 3.5 等模型的低成本 AI API 中转入口。">
+  <meta name="twitter:image" content="https://free2ai.pages.dev/favicon.svg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Free2AI",
+    "alternateName": "Free2AI AI API 中转导航",
+    "url": "https://free2ai.pages.dev/index1.0.html",
+    "inLanguage": "zh-CN",
+    "description": "聚合 GPT-5.6、Claude Opus 4.8、Claude Opus 4.8、Gemini 3.5 等模型的 AI API 中转入口，适合开发测试、自动化脚本、机器人和内容工作流。",
+    "keywords": [
+      "AI API 中转",
+      "GPT-5.6 API",
+      "Claude Opus 4.8 API",
+      "Claude Opus 4.8 API",
+      "Gemini 3.5 API",
+      "低成本 AI 调用",
+      "大模型 API 网关"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Free2AI",
+      "url": "https://free2ai.pages.dev/"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --ink: #eff9f4;
+      --muted: #93a79d;
+      --dark: #07130f;
+      --surface: #0d1d17;
+      --line: rgba(205, 241, 222, .13);
+      --green: #57ed9f;
+      --green-deep: #159a61;
+      --lime: #c9ff72;
+      --paper: #f2f7f3;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--dark);
+      font-family: "Manrope", "Noto Sans SC", sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 74% 0%, rgba(24, 157, 98, .2), transparent 34rem),
+        linear-gradient(180deg, #081510, #06100d 72%, #091612);
+    }
+
+    .ambient::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .32;
+      background-image:
+        linear-gradient(rgba(211, 247, 228, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(211, 247, 228, .045) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(#000, transparent 82%);
+      animation: gridMove 28s linear infinite;
+    }
+
+    .glow {
+      position: absolute;
+      width: 42rem;
+      height: 42rem;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .15;
+      background: #39e994;
+      animation: glowDrift 16s ease-in-out infinite alternate;
+    }
+
+    .glow.one { left: -20rem; top: -15rem; }
+    .glow.two { right: -20rem; top: 35%; animation-delay: -7s; }
+
+    .shell { width: min(1320px, calc(100% - 48px)); margin: 0 auto; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 88px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand { display: flex; align-items: center; gap: 13px; }
+    .brand-mark {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      color: #092016;
+      background: var(--green);
+      clip-path: polygon(50% 0, 92% 25%, 92% 75%, 50% 100%, 8% 75%, 8% 25%);
+      font-size: 11px;
+      font-weight: 800;
+      animation: markTurn 9s linear infinite;
+    }
+
+    .brand-copy strong { display: block; font-size: 17px; letter-spacing: -.03em; }
+    .brand-copy span { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .version { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--green); font-size: 10px; font-weight: 800; }
+
+    .nav { display: flex; align-items: center; gap: 8px; }
+    .nav a { padding: 10px 13px; color: #a3b5ac; font-size: 12px; font-weight: 700; border-radius: 999px; transition: .25s ease; }
+    .nav a:hover { color: #fff; background: rgba(255,255,255,.06); }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(340px, .75fr);
+      gap: 60px;
+      align-items: center;
+      min-height: 570px;
+      padding: 74px 0 64px;
+    }
+
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 19px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 30px; height: 2px; background: var(--green); }
+    h1 { max-width: 830px; margin: 0; font-size: clamp(58px, 7.2vw, 108px); line-height: .93; letter-spacing: -.075em; }
+    h1 span { color: var(--green); }
+    .lead { max-width: 690px; margin: 27px 0 32px; color: #a5b7ae; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.85; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .button { position: relative; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-width: 210px; min-height: 58px; padding: 0 20px; border: 1px solid var(--line); border-radius: 16px; font-size: 13px; font-weight: 800; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+    .button::after { content: "↗"; font-size: 19px; }
+    .button.primary { color: #07140e; background: var(--green); border-color: var(--green); }
+    .button.secondary { color: #eff9f4; background: rgba(255,255,255,.045); }
+    .button:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.22); }
+
+    .hero-visual { position: relative; min-height: 390px; perspective: 1000px; }
+    .route-card {
+      position: absolute;
+      width: min(100%, 390px);
+      min-height: 228px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(15, 35, 27, .88);
+      box-shadow: 0 35px 90px rgba(0,0,0,.32);
+      backdrop-filter: blur(18px);
+      transform-style: preserve-3d;
+    }
+
+    .route-card.gpt { top: 10px; right: 8%; animation: cardFloat 6s ease-in-out infinite alternate; }
+    .route-card.claude { right: -3%; bottom: 5px; color: #082017; background: var(--lime); border-color: var(--lime); animation: cardFloat 7s -3s ease-in-out infinite alternate-reverse; }
+    .route-label { display: flex; align-items: center; justify-content: space-between; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .route-label i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(87,237,159,.1); }
+    .claude .route-label i { background: #0b7549; box-shadow: 0 0 0 6px rgba(11,117,73,.12); }
+    .route-card h2 { margin: 46px 0 8px; font-size: 35px; letter-spacing: -.055em; }
+    .route-card p { margin: 0; color: #8da298; font-size: 12px; }
+    .claude p { color: #416654; }
+    .meter { height: 5px; margin-top: 27px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.1); }
+    .claude .meter { background: rgba(8,32,23,.13); }
+    .meter i { display: block; width: 72%; height: 100%; border-radius: inherit; background: var(--green); animation: meter 3s ease-in-out infinite alternate; }
+    .claude .meter i { width: 84%; background: #0b7549; animation-delay: -1s; }
+
+    .ticker { overflow: hidden; border-block: 1px solid var(--line); background: rgba(255,255,255,.018); }
+    .ticker-track { display: flex; width: max-content; padding: 14px 0; animation: ticker 36s linear infinite; }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    .ticker-group { display: flex; align-items: center; }
+    .ticker span { display: inline-flex; align-items: center; gap: 10px; padding: 0 25px; color: #9cafaa; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .ticker span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+    .channels { padding: 90px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 28px; }
+    .section-head small { color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .section-head h2 { margin: 8px 0 0; font-size: clamp(34px, 4vw, 58px); letter-spacing: -.055em; }
+    .section-head p { max-width: 390px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+
+    .channel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .channel {
+      position: relative;
+      min-height: 300px;
+      overflow: hidden;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--surface);
+      transition: transform .3s ease, border-color .3s ease;
+    }
+
+    .channel:nth-child(2) { color: #092018; background: var(--paper); }
+    .channel:hover { transform: translateY(-7px); border-color: rgba(87,237,159,.42); }
+    .channel-index { color: var(--green); font-size: 11px; font-weight: 800; }
+    .channel:nth-child(2) .channel-index { color: var(--green-deep); }
+    .channel h3 { max-width: 440px; margin: 55px 0 15px; font-size: clamp(27px, 3vw, 42px); line-height: 1.1; letter-spacing: -.05em; }
+    .channel p { max-width: 460px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .channel:nth-child(2) p { color: #617068; }
+    .channel-link { position: absolute; right: 28px; top: 26px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; color: #092018; background: var(--green); font-size: 20px; transition: transform .3s ease; }
+    .channel:nth-child(2) .channel-link { color: #fff; background: var(--green-deep); }
+    .channel:hover .channel-link { transform: rotate(45deg); }
+    .rings { position: absolute; right: -100px; bottom: -140px; width: 310px; height: 310px; border: 42px solid rgba(87,237,159,.08); border-radius: 50%; animation: rings 8s ease-in-out infinite alternate; }
+    .channel:nth-child(2) .rings { border-color: rgba(21,154,97,.09); }
+
+    .benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--line); }
+    .benefit { min-height: 180px; padding: 24px; background: #0a1813; }
+    .benefit b { display: block; margin-bottom: 38px; color: var(--green); font-size: 11px; }
+    .benefit h3 { margin: 0 0 9px; font-size: 18px; }
+    .benefit p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+    .notice { margin: 70px 0 0; padding: 20px 0; border-top: 1px solid var(--line); color: #758a80; font-size: 11px; line-height: 1.8; }
+    footer { display: flex; justify-content: space-between; gap: 20px; padding: 28px 0 40px; color: #65796f; font-size: 11px; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.75,.25,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes gridMove { to { background-position: 72px 72px; } }
+    @keyframes glowDrift { to { transform: translate(12rem, 8rem) scale(1.2); } }
+    @keyframes markTurn { to { transform: rotateY(360deg); } }
+    @keyframes cardFloat { to { transform: translateY(-15px) rotate(1deg); } }
+    @keyframes meter { to { width: 94%; } }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+    @keyframes rings { to { transform: translate(-25px, -18px) scale(.92); } }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 25px; padding-top: 60px; }
+      .hero-visual { min-height: 360px; }
+      .route-card.gpt { left: 0; right: auto; }
+      .route-card.claude { right: 0; }
+      .benefits { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 24px, 1320px); }
+      .topbar { min-height: 72px; }
+      .nav { display: none; }
+      .hero { min-height: 0; padding: 52px 0 46px; }
+      h1 { font-size: clamp(53px, 16vw, 76px); }
+      .lead { font-size: 14px; }
+      .hero-actions { display: grid; }
+      .button { width: 100%; }
+      .hero-visual { min-height: 410px; }
+      .route-card { width: 92%; min-height: 210px; }
+      .route-card.gpt { top: 8px; }
+      .route-card.claude { bottom: 10px; }
+      .channel-grid { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .benefits { grid-template-columns: 1fr; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><span class="glow one"></span><span class="glow two"></span></div>
+
+  <header class="shell topbar">
+    <a class="brand" href="#top" aria-label="Free2AI 首页">
+      <span class="brand-mark">F2</span>
+      <span class="brand-copy"><strong>Free2AI</strong><span>Relay directory</span></span>
+      <span class="version">1.0</span>
+    </a>
+    <nav class="nav" aria-label="页面导航">
+      <a href="#channels">通道</a>
+      <a href="#advantages">优势</a>
+      <a href="https://t.me/kkscshop" target="_blank" rel="noopener noreferrer">客服</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="shell hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Free2AI 1.0 · live gateways</div>
+        <h1>新模型，<br><span>即刻接入。</span></h1>
+        <p class="lead">聚合 GPT-5.6、Claude Opus 4.8、Claude Opus 4.8 与更多主流模型通道。面向开发测试、自动化脚本和内容工作流，提供更直接、更低成本的接入选择。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://pay.kklt.lol/" target="_blank" rel="noopener noreferrer">进入 GPT-5.6 通道</a>
+          <a class="button secondary" href="https://fuckme.443.hk/" target="_blank" rel="noopener noreferrer">进入 Claude Opus 4.8 通道</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="在线通道状态">
+        <article class="route-card gpt">
+          <div class="route-label"><span>Gateway 01</span><i></i></div>
+          <h2>GPT-5.6</h2>
+          <p>Luna · Sol · Terra 全系列通道在线</p>
+          <div class="meter"><i></i></div>
+        </article>
+        <article class="route-card claude">
+          <div class="route-label"><span>Gateway 02</span><i></i></div>
+          <h2>Claude Opus 4.8</h2>
+          <p>全模型支持 · 超低价格 · 分销可提现</p>
+          <div class="meter"><i></i></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="支持的模型">
+      <div class="ticker-track">
+        <div class="ticker-group"><span>GPT-5.6</span><span>GPT-5.6</span><span>GPT-5.6</span><span>claude-opus-4-8</span><span>claude-sonnet-5</span><span>Claude Opus 4.8</span><span>gemini</span></div>
+        <div class="ticker-group" aria-hidden="true"><span>GPT-5.6</span><span>GPT-5.6</span><span>GPT-5.6</span><span>claude-opus-4-8</span><span>claude-sonnet-5</span><span>Claude Opus 4.8</span><span>gemini</span></div>
+      </div>
+    </div>
+
+    <section class="shell channels reveal" id="channels">
+      <div class="section-head">
+        <div><small>Choose your gateway</small><h2>两条主力通道</h2></div>
+        <p>按模型和使用场景直接选择入口。所有链接均在新窗口打开，不打断当前浏览。</p>
+      </div>
+      <div class="channel-grid">
+        <article class="channel">
+          <span class="channel-index">01 / GPT CHANNEL</span>
+          <a class="channel-link" href="https://pay.kklt.lol/" target="_blank" rel="noopener noreferrer" aria-label="打开 GPT-5.6 通道">↗</a>
+          <h3>GPT-5.6<br>Luna / Sol / Terra</h3>
+          <p>覆盖 GPT-5.6 系列模型，适合开发、代码、自动化与高频调用场景。</p>
+          <span class="rings" aria-hidden="true"></span>
+        </article>
+        <article class="channel">
+          <span class="channel-index">02 / CLAUDE CHANNEL</span>
+          <a class="channel-link" href="https://fuckme.443.hk/" target="_blank" rel="noopener noreferrer" aria-label="打开 Claude Opus 4.8 通道">↗</a>
+          <h3>Claude Opus 4.8<br>Claude Opus 4.8</h3>
+          <p>全模型支持、超低价格，支持二级分销，分销收益可提现。</p>
+          <span class="rings" aria-hidden="true"></span>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell reveal" id="advantages">
+      <div class="benefits">
+        <article class="benefit"><b>01</b><h3>快速进入</h3><p>首屏直达主力服务，不需要翻找历史链接。</p></article>
+        <article class="benefit"><b>02</b><h3>模型齐全</h3><p>覆盖 GPT、Claude、Fable 与 Gemini 3.5 等模型。</p></article>
+        <article class="benefit"><b>03</b><h3>低成本</h3><p>适合开发测试、高频调用和轻量项目接入。</p></article>
+        <article class="benefit"><b>04</b><h3>多场景</h3><p>支持脚本、机器人、内容生成与自动化工作流。</p></article>
+      </div>
+      <div class="notice"><strong>免责声明：</strong>本页面仅提供 AI API 中转信息与入口导航，不是 OpenAI、Anthropic、Google 或任何模型厂商的官方服务。使用第三方服务前，请自行核验价格、隐私协议、服务条款和稳定性。</div>
+    </section>
+  </main>
+
+  <footer class="shell"><span>Free2AI 1.0 · AI API Relay Directory</span><span>https://free2ai.pages.dev/</span></footer>
+
+  <script>
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll('.reveal');
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      revealItems.forEach(item => item.classList.add('visible'));
+    } else {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach(item => observer.observe(item));
+    }
+  </script>
+</body>
+</html>
